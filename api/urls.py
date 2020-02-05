@@ -1,10 +1,15 @@
-from django.urls import path, re_path
-from django.conf.urls import include
-from django.contrib.auth.models import User
-# from rest_framework import routers, serilizers, viewsets
-from api.views import CustomAuthToken, JuegosList
+from django.urls import re_path
+from api.views import CustomAuthToken
+
+from api.viewsets import JuegosViewSet
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register('juegos',JuegosViewSet)
 
 urlpatterns = [
     re_path('login', CustomAuthToken.as_view()),
-    re_path('juegos',JuegosList.as_view()),
+    #re_path('juegos',JuegosList.as_view()),
 ]
+
+urlpatterns += router.urls

@@ -1,9 +1,6 @@
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework import generics
-from api.models import Juegos
-from api.serializers import JuegosSerializer
 
 class CustomAuthToken(ObtainAuthToken):
 
@@ -17,10 +14,6 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'user_id': user.pk,
-            'email': user.email,
             'username': user.username,
         })
 
-class JuegosList(generics.ListCreateAPIView):
-    queryset = Juegos.objects.all()
-    serializer_class = JuegosSerializer
